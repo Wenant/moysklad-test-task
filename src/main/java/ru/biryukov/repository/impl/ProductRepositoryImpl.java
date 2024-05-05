@@ -24,7 +24,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Product getProductById(int id) {
-        if (id < 0 || id >=products.size()) {
+        if (id < 0 || id >= products.size()) {
             throw new ProductNotFoundException("Product with id " + id + " not found");
         }
         return products.get(id);
