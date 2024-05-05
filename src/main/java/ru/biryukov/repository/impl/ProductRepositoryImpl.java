@@ -1,11 +1,13 @@
 package ru.biryukov.repository.impl;
 
+import org.springframework.stereotype.Repository;
 import ru.biryukov.exception.ProductNotFoundException;
 import ru.biryukov.model.Product;
 import ru.biryukov.repository.ProductRepository;
 
 import java.util.List;
 
+@Repository
 public class ProductRepositoryImpl implements ProductRepository {
     private List<Product> products;
 
