@@ -1,4 +1,4 @@
 package ru.biryukov.service;
 
-public class ProductService {
+public interface ProductService {
 }
