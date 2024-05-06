@@ -5,11 +5,24 @@ import ru.biryukov.exception.ProductNotFoundException;
 import ru.biryukov.model.Product;
 import ru.biryukov.repository.ProductRepository;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
-    private List<Product> products;
+    private final List<Product> products = new ArrayList<>();
+    private final BigDecimal price = new BigDecimal("1.0");
+    Product productOne = new Product("productOne", "description 1", price , true);
+    Product productTwo = new Product("productTwo", "description 2", price , false);
+    Product productThree = new Product("productThree", "description 3", price , true);
+
+    public ProductRepositoryImpl() {
+        products.add(productOne);
+        products.add(productTwo);
+        products.add(productThree);
+    }
+
 
 
     @Override
