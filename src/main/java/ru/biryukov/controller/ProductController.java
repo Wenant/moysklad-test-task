@@ -28,18 +28,24 @@ public class ProductController {
     }
 
 
+//    @PostMapping("/products")
+//    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO product,
+//                                                BindingResult result) {
+//        if (result.hasErrors()) {
+//            Map<String, String> errors = new HashMap<>();
+//            for (FieldError error : result.getFieldErrors()) {
+//                errors.put(error.getField(), error.getDefaultMessage());
+//            }
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+//        }
+//        productService.addProduct(product);
+//        return ResponseEntity.ok().body("Product created successfully");
+//    }
+
     @PostMapping("/products")
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO product,
-                                                BindingResult result) {
-        if (result.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            for (FieldError error : result.getFieldErrors()) {
-                errors.put(error.getField(), error.getDefaultMessage());
-            }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-        }
+    public ResponseEntity<String> createProduct(@Validated @RequestBody ProductDTO product) {
         productService.addProduct(product);
-        return ResponseEntity.ok().body("Product created successfully");
+        return ResponseEntity.ok("Product created successfully");
     }
 
     @GetMapping("/products/{productId}")
