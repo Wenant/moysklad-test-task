@@ -1,4 +1,4 @@
-package ru.biryukov.exception;
+package ru.biryukov.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

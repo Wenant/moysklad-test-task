@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.biryukov.exception.ErrorResponse;
 import ru.biryukov.exception.ProductNotFoundException;
+import ru.biryukov.response.ErrorResponse;
 
 import java.time.LocalDateTime;
 

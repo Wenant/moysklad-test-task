@@ -1,12 +1,15 @@
 package ru.biryukov.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.biryukov.dto.ProductDTO;
+import ru.biryukov.response.SuccessResponse;
 import ru.biryukov.service.ProductService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,9 +26,13 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<String> createProduct(@Validated @RequestBody ProductDTO product) {
+    public ResponseEntity<SuccessResponse> createProduct(@Validated @RequestBody ProductDTO product) {
         productService.addProduct(product);
-        return ResponseEntity.ok("Product created successfully");
+        SuccessResponse successResponse = new SuccessResponse(
+                LocalDateTime.now(),
+                HttpStatus.CREATED.value(),
+                "Product created successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body(successResponse);
     }
 
     @GetMapping("/products/{productId}")
@@ -37,13 +44,22 @@ public class ProductController {
     @PutMapping("/products/{productId}")
     public ResponseEntity<?> updateProduct(@PathVariable int productId, @Validated @RequestBody ProductDTO product) {
         productService.updateProduct(productId, product);
-        return ResponseEntity.ok().body("Product updated successfully");
+        SuccessResponse successResponse = new SuccessResponse(
+                LocalDateTime.now(),
+                HttpStatus.OK.value(),
+                "Product updated successfully");
+
+        return ResponseEntity.ok().body(successResponse);
     }
 
     @DeleteMapping("/products/{productId}")
     public ResponseEntity<?> deleteProductById(@PathVariable int productId) {
         productService.deleteProductById(productId);
-        return ResponseEntity.ok().body("Product deleted successfully");
+        SuccessResponse successResponse = new SuccessResponse(
+                LocalDateTime.now(),
+                HttpStatus.OK.value(),
+                "Product deleted successfully");
+        return ResponseEntity.ok().body(successResponse);
     }
 
 }
