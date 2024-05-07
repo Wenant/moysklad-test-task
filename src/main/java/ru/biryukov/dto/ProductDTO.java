@@ -23,7 +23,7 @@ public class ProductDTO {
     private String name;
 
     @Size(max = 4096, message = "Product description must be no more than 4096 characters")
-    private String description;
+    private String description= "";
 
     @PositiveOrZero(message = "Product price cannot be negative")
     @Digits(integer = 10, fraction = 2, message = "Product price must have up to 2 digits after the decimal point")
