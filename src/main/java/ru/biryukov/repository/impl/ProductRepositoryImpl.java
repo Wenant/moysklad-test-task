@@ -12,17 +12,6 @@ import java.util.List;
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
     private final List<Product> products = new ArrayList<>();
-    private final BigDecimal price = new BigDecimal("1.0");
-    Product productOne = new Product(0, "productOne", "description 1", price, true);
-    Product productTwo = new Product(0, "productTwo", "description 2", price, false);
-    Product productThree = new Product(0, "productThree", "description 3", price, true);
-
-    public ProductRepositoryImpl() {
-        addProduct(productOne);
-        addProduct(productTwo);
-        addProduct(productThree);
-    }
-
 
     @Override
     public void addProduct(Product product) {
