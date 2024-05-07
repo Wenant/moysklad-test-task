@@ -2,7 +2,6 @@ package ru.biryukov.dto;
 
 
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
