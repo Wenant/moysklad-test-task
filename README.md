@@ -1,3 +1,3 @@
 # moysklad-test-task
 
-[t1](https://github.com/Wenant/moysklad-test-task/tree/t1)
+[Задание 1. Базовая реализация REST API (t1 ветка)](https://github.com/Wenant/moysklad-test-task/tree/t1)
