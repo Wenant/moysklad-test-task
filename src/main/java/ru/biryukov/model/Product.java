@@ -1,6 +1,8 @@
 package ru.biryukov.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +24,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 255, nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 4096)
     private String description;
 
     @Column(name = "price")
+    @Min(0)
+    @Digits(integer=10, fraction=2)
     private BigDecimal price;
 
-    @Column(name = "available")
-    private boolean available;
+    @Column(nullable = false)
+    private boolean available = false;
 
 }
