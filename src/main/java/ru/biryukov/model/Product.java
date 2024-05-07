@@ -14,12 +14,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
+
+    private int id;
     private String name;
     private String description;
-
-
     private BigDecimal price = new BigDecimal("0.0");
-
     private boolean available = false;
 
 }

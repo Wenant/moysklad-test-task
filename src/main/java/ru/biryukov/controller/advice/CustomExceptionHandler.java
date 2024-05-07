@@ -1,4 +1,4 @@
-package ru.biryukov.controller;
+package ru.biryukov.controller.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

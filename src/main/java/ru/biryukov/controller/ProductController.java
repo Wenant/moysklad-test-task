@@ -40,6 +40,16 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable int productId, @Validated @RequestBody ProductDTO product) {
+        productService.updateProduct(productId, product);
+        return ResponseEntity.ok().body("Product updated successfully");
+    }
 
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<?> deleteProductById(@PathVariable int productId) {
+        productService.deleteProductById(productId);
+        return ResponseEntity.ok().body("Product deleted successfully");
+    }
 
 }

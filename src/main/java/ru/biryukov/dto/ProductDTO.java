@@ -31,4 +31,5 @@ public class ProductDTO {
     private BigDecimal price = new BigDecimal("0.0");
 
     private boolean available = false;
+
 }
