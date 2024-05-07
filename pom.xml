@@ -14,6 +14,7 @@
         <lombok.version>1.18.32</lombok.version>
         <fasterxml.jackson.core.version>2.17.0</fasterxml.jackson.core.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <postgresql.version>42.7.3</postgresql.version>
     </properties>
 
 
@@ -28,8 +29,17 @@
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
 
-
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

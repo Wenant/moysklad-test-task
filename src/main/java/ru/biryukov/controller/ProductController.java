@@ -36,13 +36,13 @@ public class ProductController {
     }
 
     @GetMapping("/products/{productId}")
-    public ResponseEntity<?> getProductById(@PathVariable int productId) {
+    public ResponseEntity<?> getProductById(@PathVariable Long productId) {
         ProductDTO product = productService.getProductById(productId);
         return ResponseEntity.ok().body(product);
     }
 
     @PutMapping("/products/{productId}")
-    public ResponseEntity<?> updateProduct(@PathVariable int productId, @Validated @RequestBody ProductDTO product) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long productId, @Validated @RequestBody ProductDTO product) {
         productService.updateProduct(productId, product);
         SuccessResponse successResponse = new SuccessResponse(
                 LocalDateTime.now(),
@@ -53,7 +53,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{productId}")
-    public ResponseEntity<?> deleteProductById(@PathVariable int productId) {
+    public ResponseEntity<?> deleteProductById(@PathVariable Long productId) {
         productService.deleteProductById(productId);
         SuccessResponse successResponse = new SuccessResponse(
                 LocalDateTime.now(),

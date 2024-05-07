@@ -3,7 +3,9 @@ package ru.biryukov.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.biryukov.dto.ProductDTO;
+import ru.biryukov.exception.ProductNotFoundException;
 import ru.biryukov.mapper.ProductMapper;
+import ru.biryukov.model.Product;
 import ru.biryukov.repository.ProductRepository;
 import ru.biryukov.service.ProductService;
 
@@ -20,29 +22,40 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(ProductDTO productDTO) {
         var product = productMapper.toProduct(productDTO);
-        productRepository.addProduct(product);
+        productRepository.save(product);
     }
 
     @Override
     public List<ProductDTO> getAllProducts() {
-        var products = productRepository.getAllProducts();
+        var products = productRepository.findAll();
         return productMapper.toProductDTOs(products);
     }
 
     @Override
-    public ProductDTO getProductById(int id) {
-        var product = productRepository.getProductById(id);
+    public ProductDTO getProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " not found"));
+
         return productMapper.toProductDTO(product);
     }
 
     @Override
-    public void updateProduct(int id, ProductDTO productDTO) {
-        var product = productMapper.toProduct(productDTO);
-        productRepository.updateProduct(id, product);
+    public void updateProduct(Long id, ProductDTO productDTO) {
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " not found"));
+
+        productMapper.updateProductFromDTO(productDTO, existingProduct);
+        productRepository.save(existingProduct);
     }
 
     @Override
-    public void deleteProductById(int id) {
-        productRepository.deleteProductById(id);
+    public void deleteProductById(Long id) {
+        productRepository.deleteById(id);
+    }
+
+    private void validateProductExists(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new ProductNotFoundException("Product with id " + id + " not found");
+        }
     }
 }

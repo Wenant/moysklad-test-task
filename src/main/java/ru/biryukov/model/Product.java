@@ -1,5 +1,6 @@
 package ru.biryukov.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +13,25 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "products")
 public class Product {
 
-    private int id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
-    private BigDecimal price = new BigDecimal("0.0");
-    private boolean available = false;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @Column(name = "available")
+    private boolean available;
 
 }
