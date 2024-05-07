@@ -37,26 +37,31 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Product getProductById(int id) {
-        if (id < 0 || id >= products.size()) {
-            throw new ProductNotFoundException("Product with id " + id + " not found");
-        }
+        validateProductId(id);
         return products.get(id);
     }
 
     @Override
     public void updateProduct(int id, Product product) {
-        if (id < 0 || id >= products.size()) {
-            throw new ProductNotFoundException("Product with id " + id + " not found");
-        }
+        validateProductId(id);
         products.set(id, product);
     }
 
     @Override
     public void deleteProductById(int id) {
+        validateProductId(id);
+        products.remove(id);
+
+        // Update the id of the remaining products
+        for (int i = id; i < products.size(); i++) {
+            products.get(i).setId(i);
+        }
+
+    }
+
+    private void validateProductId(int id) {
         if (id < 0 || id >= products.size()) {
             throw new ProductNotFoundException("Product with id " + id + " not found");
         }
-        products.remove(id);
-
     }
 }

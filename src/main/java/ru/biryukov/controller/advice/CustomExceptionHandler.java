@@ -1,5 +1,6 @@
 package ru.biryukov.controller.advice;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,17 +15,18 @@ import java.time.LocalDateTime;
 public class CustomExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFoundException(ProductNotFoundException ex) {
+    public ResponseEntity<ErrorResponse> handleProductNotFoundException(ProductNotFoundException ex, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.NOT_FOUND.value(),
                 "Product not found",
-                ex.getMessage());
+                ex.getMessage(),
+                request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<?> handleValidationException(MethodArgumentNotValidException ex, HttpServletRequest request) {
         StringBuilder errorMessage = new StringBuilder();
         ex.getFieldErrors().forEach(error -> {
             errorMessage.append(error.getField()).append(": ").append(error.getDefaultMessage()).append("; ");
@@ -33,7 +35,8 @@ public class CustomExceptionHandler {
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 "Validation failed",
-                errorMessage.toString());
+                errorMessage.toString(),
+                request.getRequestURI());
 
         return ResponseEntity.badRequest().body(response);
     }
