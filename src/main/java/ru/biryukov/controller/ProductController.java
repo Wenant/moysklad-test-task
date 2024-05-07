@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class ProductController {
 
     private final ProductService productService;
@@ -26,21 +27,6 @@ public class ProductController {
         List<ProductDTO> products = productService.getAllProducts();
         return ResponseEntity.ok().body(products);
     }
-
-
-//    @PostMapping("/products")
-//    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO product,
-//                                                BindingResult result) {
-//        if (result.hasErrors()) {
-//            Map<String, String> errors = new HashMap<>();
-//            for (FieldError error : result.getFieldErrors()) {
-//                errors.put(error.getField(), error.getDefaultMessage());
-//            }
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-//        }
-//        productService.addProduct(product);
-//        return ResponseEntity.ok().body("Product created successfully");
-//    }
 
     @PostMapping("/products")
     public ResponseEntity<String> createProduct(@Validated @RequestBody ProductDTO product) {
@@ -53,5 +39,7 @@ public class ProductController {
         ProductDTO product = productService.getProductById(productId);
         return ResponseEntity.ok().body(product);
     }
+
+
 
 }

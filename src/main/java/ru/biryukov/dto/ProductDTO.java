@@ -1,6 +1,7 @@
 package ru.biryukov.dto;
 
 
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
@@ -18,16 +19,16 @@ public class ProductDTO {
 
     private int id;
 
-    @NotBlank(message = "Название не может быть пустым")
-    @Size(max = 255, message = "Название товара должно содержать не более 255 символов")
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 255, message = "Product name must be no more than 255 characters")
     private String name;
 
-    @Size(max = 4096, message = "Описание товара должно содержать не более 4096 символов")
+    @Size(max = 4096, message = "Product description must be no more than 4096 characters")
     private String description;
 
-    @PositiveOrZero(message = "Цена товара не может быть отрицательной")
+    @PositiveOrZero(message = "Product price cannot be negative")
+    @Digits(integer = 10, fraction = 2, message = "Product price must have up to 2 digits after the decimal point")
     private BigDecimal price = new BigDecimal("0.0");
-
 
     private boolean available = false;
 }
