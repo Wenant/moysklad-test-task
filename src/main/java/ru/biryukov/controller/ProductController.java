@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.biryukov.dto.ProductDTO;
+import ru.biryukov.dto.ProductFilterDTO;
 import ru.biryukov.response.SuccessResponse;
 import ru.biryukov.service.ProductService;
 
@@ -20,8 +21,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductDTO>> getAllProducts(@Validated ProductFilterDTO filter) {
+        List<ProductDTO> products = productService.getAllProducts(filter);
         return ResponseEntity.ok().body(products);
     }
 

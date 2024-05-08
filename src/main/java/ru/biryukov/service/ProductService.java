@@ -2,6 +2,7 @@ package ru.biryukov.service;
 
 import org.springframework.stereotype.Service;
 import ru.biryukov.dto.ProductDTO;
+import ru.biryukov.dto.ProductFilterDTO;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface ProductService {
     void addProduct(ProductDTO product);
 
-    List<ProductDTO> getAllProducts();
+    List<ProductDTO> getAllProducts(ProductFilterDTO filter);
 
     ProductDTO getProductById(Long id);
 
