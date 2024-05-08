@@ -32,7 +32,7 @@ public class Product {
 
     @Column(name = "price")
     @Min(0)
-    @Digits(integer=10, fraction=2)
+    @Digits(integer = 10, fraction = 2)
     private BigDecimal price;
 
     @Column(nullable = false)
