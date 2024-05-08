@@ -1,4 +1,4 @@
-# moysklad-test-task
+# Тестовое задание МойСклад
 
 [Задание 1. Базовая реализация REST API (t1 ветка)](https://github.com/Wenant/moysklad-test-task/tree/t1)
 
