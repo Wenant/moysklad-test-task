@@ -2,12 +2,12 @@ package ru.biryukov.dto;
 
 
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.math.BigDecimal;
 
@@ -18,7 +18,7 @@ public class ProductDTO {
 
     private Long id;
 
-    @NotBlank(message = "Name cannot be empty")
+    @NotEmpty(message = "Name cannot be empty")
     @Size(max = 255, message = "Product name must be no more than 255 characters")
     private String name;
 
