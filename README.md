@@ -12,6 +12,42 @@
 
     URL: http://localhost:8080/
 
+## Контроллер управления документами продаж:
+    Эндпоинты:
+
+    POST    /api/v1/sale-documents:         Создать документ о продаже.
+    GET     /api/v1/sale-documents:         Получить все документы о продаже.
+    GET     /api/v1/sale-documents/{id}:    Получить документ о продаже по идентификатору.
+    PUT     /api/v1/sale-documents/{id}:    Обновить документ о продаже по идентификатору.
+    DELETE  /api/v1/sale-documents/{id}:    Удалить документ о продаже по идентификатору.
+
+#### Пример POST запроса JSON 
+```json
+{
+  "productId": 78,
+  "name": "Example Sale Document",
+  "quantity": 78
+}
+```
+
+## Контроллер управления документами поставок:
+    Эндпоинты:
+
+    GET     /api/v1/supply-documents:       Получить все документы поставок.
+    GET     /api/v1/supply-documents/{id}:  Получить документ поставки по идентификатору.
+    POST    /api/v1/supply-documents:       Создать новый документ поставки.
+    PUT     /api/v1/supply-documents/{id}:  Обновить документ поставки по идентификатору.
+    DELETE  /api/v1/supply-documents/{id}:  Удалить документ поставки по идентификатору.
+
+#### Пример POST запроса JSON
+```json
+{
+  "productId": 60,
+  "name": "Example Supply Document",
+  "quantity": 2
+}
+```
+
 ## Контроллер Товаров:
 
 ### 1. Получение всех товаров
