@@ -30,9 +30,5 @@ public class SaleDocumentDTO {
 
     private BigDecimal totalCost;
 
-    public void setIdAndTotalCost(Long id, BigDecimal totalCost) {
-        this.id = id;
-        this.totalCost = totalCost;
-    }
 
 }

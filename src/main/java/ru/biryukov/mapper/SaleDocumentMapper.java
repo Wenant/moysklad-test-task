@@ -2,6 +2,7 @@ package ru.biryukov.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import ru.biryukov.dto.SaleDocumentDTO;
 import ru.biryukov.model.Product;
 import ru.biryukov.model.SaleDocument;
@@ -22,6 +23,11 @@ public interface SaleDocumentMapper {
     SaleDocument toSaleDocument(SaleDocumentDTO saleDocumentDTO);
 
     List<SaleDocument> toSaleDocuments(List<SaleDocumentDTO> saleDocumentDTOS);
+
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "productId", ignore = true)
+    void updateSaleDocumentFromDTO(SaleDocumentDTO saleDocumentDTO, @MappingTarget SaleDocument saleDocument);
 
 
     default Long map(Product value) {

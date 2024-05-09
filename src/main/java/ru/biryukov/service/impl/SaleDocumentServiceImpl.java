@@ -34,24 +34,35 @@ public class SaleDocumentServiceImpl implements SaleDocumentService {
     @Override
     public List<SaleDocumentDTO> getAllSaleDocuments() {
         var saleDocuments = saleDocumentRepository.findAll();
-        var saleDocumentDTOS = mapper.toSaleDocumentDTOs(saleDocuments);
 
-        return saleDocumentDTOS;
+        return mapper.toSaleDocumentDTOs(saleDocuments);
     }
 
     @Override
     public SaleDocumentDTO getSaleDocumentById(Long id) {
-        return null;
+        var saleDocument = saleDocumentRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Document with id " + id + " not found"));
+
+        return mapper.toSaleDocumentDTO(saleDocument);
     }
 
     @Override
     public void updateSaleDocument(Long id, SaleDocumentDTO saleDocument) {
+        var sale = saleDocumentRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException("Document with id " + id + " not found"));
 
+        Product product = productRepository.findById(saleDocument.getProductId())
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " not found"));
+
+        mapper.updateSaleDocumentFromDTO(saleDocument, sale);
+        sale.setProductId(product);
+        sale.setTotalCost(countTotalCost(sale, product));
+        saleDocumentRepository.save(sale);
     }
 
     @Override
     public void deleteSaleDocumentById(Long id) {
-
+        saleDocumentRepository.deleteById(id);
     }
 
 

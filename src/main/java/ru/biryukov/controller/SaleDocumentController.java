@@ -35,5 +35,31 @@ public class SaleDocumentController {
         return ResponseEntity.ok().body(saleDocuments);
     }
 
+    @GetMapping("/sale-documents/{id}")
+    public ResponseEntity<?> getSaleDocumentById(@PathVariable Long id) {
+        SaleDocumentDTO saleDocument = saleDocumentService.getSaleDocumentById(id);
+        return ResponseEntity.ok().body(saleDocument);
+    }
+
+    @PutMapping("/sale-documents/{id}")
+    public ResponseEntity<?> updateSaleDocument(@PathVariable Long id, @Validated @RequestBody SaleDocumentDTO saleDocument) {
+        saleDocumentService.updateSaleDocument(id, saleDocument);
+        SuccessResponse successResponse = new SuccessResponse(
+                LocalDateTime.now(),
+                HttpStatus.OK.value(),
+                "Sale document updated successfully");
+        return ResponseEntity.ok().body(successResponse);
+    }
+
+    @DeleteMapping("/sale-documents/{id}")
+    public ResponseEntity<?> deleteSaleDocumentById(@PathVariable Long id) {
+        saleDocumentService.deleteSaleDocumentById(id);
+        SuccessResponse successResponse = new SuccessResponse(
+                LocalDateTime.now(),
+                HttpStatus.OK.value(),
+                "Sale document deleted successfully");
+        return ResponseEntity.ok().body(successResponse);
+    }
+
 
 }
