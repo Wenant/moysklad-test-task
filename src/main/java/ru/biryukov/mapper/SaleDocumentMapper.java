@@ -17,6 +17,8 @@ public interface SaleDocumentMapper {
     List<SaleDocumentDTO> toSaleDocumentDTOs(List<SaleDocument> saleDocuments);
 
     @Mapping(target = "productId", ignore = true)
+    @Mapping(target = "totalCost", ignore = true)
+    @Mapping(target = "id", ignore = true)
     SaleDocument toSaleDocument(SaleDocumentDTO saleDocumentDTO);
 
     List<SaleDocument> toSaleDocuments(List<SaleDocumentDTO> saleDocumentDTOS);

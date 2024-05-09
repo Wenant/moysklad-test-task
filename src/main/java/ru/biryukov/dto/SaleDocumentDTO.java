@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class SaleDocumentDTO {
 
-    @JsonIgnore
+
     private Long id;
 
     private Long productId;
@@ -27,7 +27,12 @@ public class SaleDocumentDTO {
     @Positive(message = "Quantity cannot be negative")
     private int quantity;
 
-    @JsonIgnore
+
     private BigDecimal totalCost;
+
+    public void setIdAndTotalCost(Long id, BigDecimal totalCost) {
+        this.id = id;
+        this.totalCost = totalCost;
+    }
 
 }

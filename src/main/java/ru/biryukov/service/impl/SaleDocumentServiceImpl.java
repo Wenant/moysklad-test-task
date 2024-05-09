@@ -33,7 +33,10 @@ public class SaleDocumentServiceImpl implements SaleDocumentService {
 
     @Override
     public List<SaleDocumentDTO> getAllSaleDocuments() {
-        return null;
+        var saleDocuments = saleDocumentRepository.findAll();
+        var saleDocumentDTOS = mapper.toSaleDocumentDTOs(saleDocuments);
+
+        return saleDocumentDTOS;
     }
 
     @Override
