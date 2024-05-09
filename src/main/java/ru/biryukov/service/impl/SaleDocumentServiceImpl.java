@@ -51,9 +51,7 @@ public class SaleDocumentServiceImpl implements SaleDocumentService {
         var sale = saleDocumentRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Document with id " + id + " not found"));
 
-        Product product = productRepository.findById(saleDocument.getProductId())
-                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " not found"));
-
+        Product product = getProductById(saleDocument.getProductId());
         mapper.updateSaleDocumentFromDTO(saleDocument, sale);
         sale.setProductId(product);
         sale.setTotalCost(countTotalCost(sale, product));

@@ -3,7 +3,6 @@ package ru.biryukov.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.biryukov.dto.SupplyDocumentDTO;
@@ -62,7 +61,6 @@ public class SupplyDocumentController {
                 "Supply document deleted successfully");
         return ResponseEntity.ok().body(successResponse);
     }
-
 
 
 }

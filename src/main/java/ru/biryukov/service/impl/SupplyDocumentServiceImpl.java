@@ -20,13 +20,13 @@ public class SupplyDocumentServiceImpl implements SupplyDocumentService {
     private final SupplyDocumentMapper mapper;
     private final SupplyDocumentRepository supplyDocumentRepository;
     private final ProductRepository productRepository;
+
     @Override
     public void addSupplyDocument(SupplyDocumentDTO supplyDocument) {
         Product product = getProductById(supplyDocument.getProductId());
         SupplyDocument supply = mapper.toSupplyDocument(supplyDocument);
         supply.setProductId(product);
         supplyDocumentRepository.save(supply);
-
 
 
     }
@@ -49,9 +49,7 @@ public class SupplyDocumentServiceImpl implements SupplyDocumentService {
         var supply = supplyDocumentRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Document with id " + id + " not found"));
 
-        Product product = productRepository.findById(supplyDocument.getProductId())
-                .orElseThrow(() -> new ProductNotFoundException("Product with id " + id + " not found"));
-
+        Product product = getProductById(supplyDocument.getProductId());
         mapper.updateSupplyDocumentFromDTO(supplyDocument, supply);
         supply.setProductId(product);
         supplyDocumentRepository.save(supply);
@@ -66,4 +64,6 @@ public class SupplyDocumentServiceImpl implements SupplyDocumentService {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product with ID " + productId + " not found"));
     }
+
+
 }
