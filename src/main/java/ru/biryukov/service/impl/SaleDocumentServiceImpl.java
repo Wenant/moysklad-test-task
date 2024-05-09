@@ -26,7 +26,7 @@ public class SaleDocumentServiceImpl implements SaleDocumentService {
         Product product = getProductById(saleDocument.getProductId());
         SaleDocument sale = mapper.toSaleDocument(saleDocument);
         sale.setProductId(product);
-        sale.setTotalCost(coutTotalCost(sale, product));
+        sale.setTotalCost(countTotalCost(sale, product));
         saleDocumentRepository.save(sale);
 
     }
@@ -57,7 +57,7 @@ public class SaleDocumentServiceImpl implements SaleDocumentService {
                 .orElseThrow(() -> new ProductNotFoundException("Product with ID " + productId + " not found"));
     }
 
-    private BigDecimal coutTotalCost(SaleDocument saleDocument, Product product) {
+    private BigDecimal countTotalCost(SaleDocument saleDocument, Product product) {
         var productPrice = product.getPrice();
         var quantity = saleDocument.getQuantity();
         return new BigDecimal(quantity).multiply(productPrice);
